@@ -1,5 +1,6 @@
 import Beginner from '@/sections/Beginner'
 import Expert from '@/sections/Expert'
+import Attraction from '@/sections/Attraction'
 import FAQ from '@/sections/FAQ'
 import Feature from '@/sections/Feature'
 import Footer from '@/sections/Footer'
@@ -10,25 +11,26 @@ import Testimonials from '@/sections/Testimonials'
 import Navbar from '@/sections/component/Navbar'
 import Home from '@/sections/profile/Home'
 import ProfileDashboard from '@/sections/profile/ProfileDashboard'
+import CTA from '@/sections/cta'
 import React from 'react'
 
 
 function index() {
   return (
-    <div>
+    <div className='bg-black'>
       {/* <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
       <Expert />
-      <How />
+      <Attraction />
       <Feature />
-      <Testimonials />
       <FAQ />
+      <CTA />
       <Footer /> */}
 
       <Home />
-      <ProfileDashboard/>
+     
 
     </div>
   )
