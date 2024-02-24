@@ -1,5 +1,4 @@
-// OTPVerification.js
-
+import { Link } from 'lucide-react';
 import React, { useState } from 'react';
 
 const OTPVerification = () => {
@@ -43,7 +42,7 @@ const OTPVerification = () => {
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             {loading ? 'Verifying...' : 'Verify OTP'}
           </button>
-          <p className="text-center text-gray-500 mt-4">Didn't receive OTP? <a href="#" className="text-blue-500 hover:text-blue-600">Resend OTP</a></p>
+          <p className="text-center text-gray-500 mt-4">Didn&apos;t receive OTP? <Link href="#" className="text-blue-500 hover:text-blue-600">Resend OTP</Link></p>
         </form>
       </div>
     </div>
