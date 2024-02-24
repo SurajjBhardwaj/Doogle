@@ -18,7 +18,7 @@ import React from 'react'
 function index() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
@@ -27,9 +27,9 @@ function index() {
       <Feature />
       <FAQ />
       <CTA />
-      <Footer />
+      <Footer /> */}
 
-      {/* <Home /> */}
+      <Home />
      
 
     </>
