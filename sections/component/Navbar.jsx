@@ -28,7 +28,7 @@ const list =[
 const Navbar = () => {
   const [show , setShow] = useState(false)
   return (
-    <header className="relative inset-0 z-50  bg-black/95 backdrop-blur transition will-change-auto ">
+    <header className="relative  inset-0 z-50  bg-black/95 backdrop-blur transition will-change-auto ">
       <div className="mx-auto max-w-screen px-8 md:px-16 py-2">
         <div className="flex items-center justify-between">
           {/* brand name  */}
