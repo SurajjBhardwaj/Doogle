@@ -15,13 +15,16 @@ export default function App({ Component, pageProps }) {
     router.push(`/room/${roomName}`);
   };
 
+  // Fix: Use functional updates to ensure the correct state is set
+  const handleCredChange = (newUserName, newRoomName) => {
+    setUserName(newUserName);
+    setRoomName(newRoomName);
+  };
+
   return (
     <SessionProvider session={pageProps.session}>
       <Component
-        handleCredChange={(userName, roomName) => {
-          setUserName(userName);
-          setRoomName(roomName);
-        }}
+        handleCredChange={handleCredChange} // Pass the function directly
         userName={userName}
         roomName={roomName}
         handleLogin={handleLogin}
