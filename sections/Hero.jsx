@@ -3,11 +3,11 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="w-full h-screen bg-black">
+    <section className="relative w-full h-screen bg-black">
       <div className="max-w-screen px-8 md:px-16 py-auto">
-        <div className="absolute left-1/2 top-1/2 -z-10  w-[300px] h-[400px] md:w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-purple-500 group-hover:bg-red-500"></div>
+        <div className="absolute left-1/2 top-1/2 -z-10  w-[300px] h-[400px] md:w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-purple-700 "></div>
 
-        <div  className="flex flex-col lg:flex-row lg:mt-[8%] gap-12 h-full w-full justify-center items-center">
+        <div  className="flex flex-col lg:flex-row lg:pt-[8%] gap-12 h-full w-full justify-center items-center">
           {/* left section */}
           <div className="text-purple-100 max-w-2xl my-10 px-10 w-4xl">
             <h1 className="text-3xl font-bold tracking-tight text-purple-100 sm:text-6xl">
