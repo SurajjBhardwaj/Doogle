@@ -17,18 +17,20 @@ const ICE_SERVERS = {
 };
 
 export default function Room({ userName, roomName }) {
-   const [micActive, setMicActive] = useState(true);
-   const [cameraActive, setCameraActive] = useState(true);
-   const [screenShareActive, setScreenShareActive] = useState(false);
-   const router = useRouter();
+  const [micActive, setMicActive] = useState(true);
+  const [cameraActive, setCameraActive] = useState(true);
+  const [screenShareActive, setScreenShareActive] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const router = useRouter();
 
-   const host = useRef(false);
-   const pusherRef = useRef();
-   const channelRef = useRef();
-   const rtcConnection = useRef();
-   const userStream = useRef();
-   const userVideo = useRef(null);
-   const partnerVideo = useRef(null);
+  const host = useRef(false);
+  const pusherRef = useRef();
+  const channelRef = useRef();
+  const rtcConnection = useRef();
+  const userStream = useRef();
+  const userVideo = useRef(null);
+  const partnerVideo = useRef(null);
 
   useEffect(() => {
     pusherRef.current = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
@@ -73,6 +75,10 @@ export default function Room({ userName, roomName }) {
 
     channelRef.current.bind("client-ice-candidate", (iceCandidate) => {
       handlerNewIceCandidateMsg(iceCandidate);
+    });
+
+    channelRef.current.bind("client-message", (message) => {
+      receiveMessage(message);
     });
 
     return () => {
@@ -182,37 +188,36 @@ export default function Room({ userName, roomName }) {
     partnerVideo.current.srcObject = event.streams[0];
   };
 
-   const toggleMediaStream = (type) => {
-     if (type === "screen") {
-       if (screenShareActive) {
-          console.log("Screen sharing stopped ", screenShareActive);
-         stopScreenShare();
-       } else {
-         navigator.mediaDevices
-           .getDisplayMedia({ video: true })
-           .then((stream) => {
-             userVideo.current.srcObject = stream;
-             userStream.current = stream;
-             stream.getTracks().forEach((track) => {
-               rtcConnection.current.addTrack(track, stream);
-             });
-              setScreenShareActive(!screenShareActive);
-            //  setScreenShareActive((prev)=>!prev)
-             console.log("Screen sharing started", screenShareActive);
-           })
-           .catch((error) => {
-             console.error("Error accessing screen sharing:", error);
-           });
-       }
-     } else if (type === "video") {
-       userStream.current?.getTracks().forEach((track) => {
-         if (track.kind === "video") {
-           track.enabled = !track.enabled;
-         }
-       });
-       setCameraActive((prev) => !prev);
-     }
-   };
+  const toggleMediaStream = (type) => {
+    if (type === "screen") {
+      if (screenShareActive) {
+        console.log("Screen sharing stopped ", screenShareActive);
+        stopScreenShare();
+      } else {
+        navigator.mediaDevices
+          .getDisplayMedia({ video: true })
+          .then((stream) => {
+            userVideo.current.srcObject = stream;
+            userStream.current = stream;
+            stream.getTracks().forEach((track) => {
+              rtcConnection.current.addTrack(track, stream);
+            });
+            setScreenShareActive(!screenShareActive);
+            console.log("Screen sharing started", screenShareActive);
+          })
+          .catch((error) => {
+            console.error("Error accessing screen sharing:", error);
+          });
+      }
+    } else if (type === "video") {
+      userStream.current?.getTracks().forEach((track) => {
+        if (track.kind === "video") {
+          track.enabled = !track.enabled;
+        }
+      });
+      setCameraActive((prev) => !prev);
+    }
+  };
 
   const handlePeerLeaving = () => {
     host.current = true;
@@ -260,22 +265,37 @@ export default function Room({ userName, roomName }) {
     setCameraActive((prev) => !prev);
   };
 
- const stopScreenShare = () => {
-   if (screenShareActive) {
-     userVideo.current.srcObject = userStream.current;
-     userStream.current.getTracks().forEach((track) => {
-       if (track.kind === "video" && track.label === "screen") {
-         track.stop(); // Stop screen sharing track
-         rtcConnection.current.getSenders().forEach((sender) => {
-           if (sender.track === track) {
-             rtcConnection.current.removeTrack(sender); // Remove screen sharing track from RTC connection
-           }
-         });
-       }
-     });
-     setScreenShareActive(false);
-   }
- };
+  const stopScreenShare = () => {
+    if (screenShareActive) {
+      userVideo.current.srcObject = userStream.current;
+      userStream.current.getTracks().forEach((track) => {
+        if (track.kind === "video" && track.label === "screen") {
+          track.stop(); // Stop screen sharing track
+          rtcConnection.current.getSenders().forEach((sender) => {
+            if (sender.track === track) {
+              rtcConnection.current.removeTrack(sender); // Remove screen sharing track from RTC connection
+            }
+          });
+        }
+      });
+      setScreenShareActive(false);
+    }
+  };
+
+  const sendMessage = () => {
+    if (message.trim() === "") return;
+    const newMessage = {
+      user: userName,
+      text: message.trim(),
+    };
+    setMessages([...messages, newMessage]);
+    channelRef.current.trigger("client-message", newMessage);
+    setMessage("");
+  };
+
+  const receiveMessage = (message) => {
+    setMessages([...messages, message]);
+  };
 
   return (
     <div>
@@ -309,6 +329,25 @@ export default function Room({ userName, roomName }) {
             style={{ width: "100%", border: "1px solid #ccc" }}
           />
         </div>
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <div style={{ overflowY: "scroll", height: "200px" }}>
+          {messages.map((msg, index) => (
+            <div key={index}>
+              <strong>{msg.user}: </strong>
+              <span>{msg.text}</span>
+            </div>
+          ))}
+        </div>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") sendMessage();
+          }}
+        />
+        <button onClick={sendMessage}>Send</button>
       </div>
     </div>
   );
