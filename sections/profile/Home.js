@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CircleUserRound } from "lucide-react";
+import { ArrowUpRight, CircleUserRound, Code } from "lucide-react";
 import {
   HoverCard,
   HoverCardContent,
@@ -43,21 +43,35 @@ const Home = () => {
         </header>
 
         <div className="my-40 flex items-center justify-center gap-16">
-          <div class=" flex flex-col items-center justify-center">
-            <span class=" text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              <h1>Connect With Developer</h1>
-              <h1>Anywhere , AnyTime</h1>
+          <div class=" flex flex-col  justify-center">
+            <span class=" text-4xl font-extrabold tracking-tight text-gray-800 sm:text-6xl">
+              <h1>Connect with Developer</h1>
+              <h1>Anywhere, Anytime</h1>
             </span>
-            <p class="mt-6 text-left text-lg leading-8 text-gray-600">
-              Elevate your coding journey with us. Let&apos;s connect and grow
+            <p className="mt-6 px-4 text-left text-lg  text-gray-600">
+              Elevate your coding journey with  developers .
+               
+            </p>
+            <p className="px-4 text-left text-lg  text-gray-600">
+            Let&apos;s connect and grow
               together!
             </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-              <Button className="p-6 px-16 rounded-2xl text-base">
-                Talk Instantly
+            <div class="mt-10 flex items-center gap-x-4">
+           
+  
+
+              <Button className=" p-6 px-16 rounded-full space-x-1">
+             
+                <p className="text-xl font-light ">
+                Talk Instantly 
+                </p>
+                <ArrowUpRight strokeWidth={1.5} />
               </Button>
-              <Button className="p-6 px-24 rounded-2xl text-base" variant="secondary">
-               Match 
+              <Button className="space-x-3 p-6 px-24 rounded-full " variant="secondary">
+              <p className="text-xl font-light ">
+              Match 
+              </p>
+                <Code strokeWidth={1.5} />
               </Button>
             </div>
           </div>
