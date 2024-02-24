@@ -1,21 +1,24 @@
-import React from 'react'
+import React from "react";
+import Image from "next/image";
 
 const Intermediate = () => {
   return (
-    <section className='w-screen p-10 bg-black text-purple-100'>
-        <div className='flex flex-col md:flex-row '>
-        <div id='container' className="flex-col md:flex-row mx-[50px]">
-          <h1 className="text-5xl font-bold mb-4">Master New Skills!</h1>
-          <ul className='text-2xl text leading-loose mb-8'>
-            <li>learn from experts</li>
-            <li>Collaborate with peers on complex problems</li>
-            <li>Push your coding boundaries</li>
-          </ul>
+    <section className="w-screen p-10 bg-black ">
+      <div className="flex flex-col md:flex-row justify-evenly">
+        <div className="w-1/2">
+        <Image height={300} width={400} src="/Group 3.png" className="hidden md:block ml-20" alt="Video call"/>{" "}
         </div>
-        <img id="beginner-image" src=""></img>
+        <div id="container" className="flex-col md:flex-row md:mx-[50px] lg:w-1/2 text-purple-200 lg:pl-40">
+          <h1 className="text-xl lg:text-2xl font-bold mb-2">Skilled Developers</h1>
+          <div className="text-base text lg:leading-loose mb-8 text-white/70">
+            <p>learn from experts</p>
+            <p>Collaborate with peers on complex problems</p>
+            <p>Push your coding boundaries</p>
+          </div>
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Intermediate
+export default Intermediate;
