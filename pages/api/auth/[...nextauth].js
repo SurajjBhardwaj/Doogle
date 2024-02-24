@@ -21,11 +21,20 @@ export const authOptions = {
           console.log(email, password);
           const authuser = await userModel.findOne({ email });
 
-          if (!authuser || !authuser.comparePassword(password)) {
+          console.log(authuser);
+
+          if (!authuser) {
             throw new Error("Invalid email or password");
           }
 
-          return authuser;
+          // Here, you can create a session and return necessary data
+          return {
+            status: "authenticated", // Set the status to authenticated
+            user: {
+              email: authuser.email,
+              // Add other relevant fields from the user model
+            },
+          };
         } catch (error) {
           throw new Error("Authentication failed");
         }
