@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "next build && next export",
+    "start": "next start"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
@@ -19,6 +18,8 @@
     "next": "14.1.0",
     "next-auth": "^4.24.6",
     "postcss": "8.4.35",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0-rc2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "socket.io": "^4.7.4",

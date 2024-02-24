@@ -1,0 +1,43 @@
+{
+  "api": {
+    "apif55514c6": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "projectdoogle71a9cebc"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "projectdoogle71a9cebc": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_projectdoogle71a9cebc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projectdoogle71a9cebc"
+        }
+      ]
+    },
+    "AMPLIFY_function_projectdoogle71a9cebc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projectdoogle71a9cebc"
+        }
+      ]
+    }
+  }
+}

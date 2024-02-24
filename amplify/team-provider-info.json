@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-projectdoogle-dev-143100-authRole",
+      "UnauthRoleArn": "arn:aws:iam::603899482831:role/amplify-projectdoogle-dev-143100-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::603899482831:role/amplify-projectdoogle-dev-143100-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-projectdoogle-dev-143100-deployment",
+      "UnauthRoleName": "amplify-projectdoogle-dev-143100-unauthRole",
+      "StackName": "amplify-projectdoogle-dev-143100",
+      "StackId": "arn:aws:cloudformation:us-east-1:603899482831:stack/amplify-projectdoogle-dev-143100/3e1cba20-d2f3-11ee-8f44-12a92d6c203d",
+      "AmplifyAppId": "dmo3rtw5vg35f"
+    },
+    "categories": {
+      "function": {
+        "projectdoogle71a9cebc": {
+          "deploymentBucketName": "amplify-projectdoogle-dev-143100-deployment",
+          "s3Key": "amplify-builds/projectdoogle71a9cebc-37474e4774596a304f63-build.zip"
+        }
+      },
+      "api": {
+        "apif55514c6": {}
+      }
+    }
+  }
+}

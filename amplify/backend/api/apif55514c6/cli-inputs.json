@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/pages/api": {
+      "name": "/pages/api",
+      "lambdaFunction": "projectdoogle71a9cebc",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
