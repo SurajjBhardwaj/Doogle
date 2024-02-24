@@ -28,7 +28,7 @@ const list =[
 const Navbar = () => {
   const [show , setShow] = useState(false)
   return (
-    <header className="relative inset-0 z-50  bg-zinc-950/80 backdrop-blur transition will-change-auto ">
+    <header className="relative inset-0 z-50  bg-black/95 backdrop-blur transition will-change-auto ">
       <div className="mx-auto max-w-screen px-8 md:px-16 py-2">
         <div className="flex items-center justify-between">
           {/* brand name  */}
@@ -46,7 +46,7 @@ const Navbar = () => {
               {list.map((data, index) => (
                 <li
                   key={data.id}
-                  className="flex select-none items-center gap-0.5 rounded-md px-4 py-2 opacity-60 hover:opacity-100 hover:cursor-pointer hover:text-white/80"
+                  className="flex text-white/80 select-none items-center gap-0.5 rounded-md px-4 py-2 opacity-60 hover:opacity-100 hover:cursor-pointer hover:text-white/80"
                 >
                   <a href={data.link} className="relative group">
                     <div className="absolute w-1/3 h-0.5 bg-purple-600 scale-x-0 group-hover:scale-x-100 transition-transform -mt-1  "></div>
