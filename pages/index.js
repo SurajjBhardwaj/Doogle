@@ -8,13 +8,15 @@ import How from '@/sections/How'
 import Intermediate from '@/sections/Intermediate'
 import Testimonials from '@/sections/Testimonials'
 import Navbar from '@/sections/component/Navbar'
+import Home from '@/sections/profile/Home'
+import ProfileDashboard from '@/sections/profile/ProfileDashboard'
 import React from 'react'
 
 
 function index() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
@@ -23,7 +25,10 @@ function index() {
       <Feature />
       <Testimonials />
       <FAQ />
-      <Footer />
+      <Footer /> */}
+
+      <Home />
+      <ProfileDashboard/>
 
     </div>
   )
