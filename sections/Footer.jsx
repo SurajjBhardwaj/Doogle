@@ -1,24 +1,19 @@
 export default function Footer() {
   return (
     <section className="w-screen py-12   bg-black ">
-        <footer className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2 flex flex-col justify-evenly md:flex-row text-white gap-5">
+        <footer className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2 flex flex-col justify-evenly md:flex-row text-white gap-5 bg-gradient-to-bt from-gray-900 to-black">
           <div aria-label="About  w-1/2">
             <h className="text-2xl">About</h>
             <p className="text-white/70 font-light w-3/5">
-              Founded by a team of dedicated developers, Connect Devs emerged
+              Founded by a team of dedicated developers, Doogle emerged
               from the simple idea that connecting with fellow developers can
               enhance the learning experience and accelerate professional
-              growth. Our journey began with a vision to create a space where
-              developers of all levels can come together to learn, share, and
-              succeed.
+              growth.
             </p>
             <h1 className="mt-6 text-2xl">Vision</h1>
             <p className="text-white/70 font-light w-3/5">
               At Doogle, our mission is to empower developers by fostering a
-              supportive and collaborative environment. We believe in the
-              transformative power of connecting minds, where the exchange of
-              knowledge and experiences accelerates individual and collective
-              progress.
+              supportive and collaborative environment.
             </p>
           </div>
           <div

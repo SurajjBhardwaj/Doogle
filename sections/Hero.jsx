@@ -9,12 +9,12 @@ const Hero = () => {
 
         <div  className="flex flex-col lg:flex-row lg:pt-[8%] gap-12 h-full w-full justify-center items-center">
           {/* left section */}
-          <div className="text-purple-100 max-w-2xl my-10 px-10 w-4xl">
-            <h1 className="text-3xl font-bold tracking-tight text-purple-100 sm:text-6xl">
+          <div className="text-purple-100 max-w-2xl my-10 px-10 w-4xl flex flex-col gap-5">
+            <h1 className="text-xl font-bold tracking-tight text-purple-100 sm:text-6xl">
               Connect with Developers, anytime anywhere
             </h1>
 
-            <h2 className="my-3 opacity-60 text-black-100 text-3xl font-light font-['Inter']">
+            <h2 className="my-3 opacity-60 text-black-100 text-xl md:text-3xl font-light font-['Inter']">
               Get instant help from fellow developers,share expertise,and level
               up your skills with Doogle
             </h2>
