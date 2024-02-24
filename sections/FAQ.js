@@ -7,7 +7,7 @@ import {
 
 export default function FAQ() {
   return (
-    <section className="pt-12 mx-auto text-4xl bg-black text-purple-100">
+    <section className="pt-12 mx-auto text-4xl max-w-full bg-black text-purple-100">
       <h1 className="text-center">FAQ's</h1>
     <Accordion type="single" collapsible className="w-[900px] mt-12 mx-auto">
       <AccordionItem value="item-1">
