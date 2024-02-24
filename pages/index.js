@@ -28,7 +28,7 @@ function index() {
       <Footer /> */}
 
       <Home />
-      <ProfileDashboard/>
+     
 
     </div>
   )

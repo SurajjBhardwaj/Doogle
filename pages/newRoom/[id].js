@@ -17,19 +17,18 @@ const ICE_SERVERS = {
 };
 
 export default function Room({ userName, roomName }) {
-  const [micActive, setMicActive] = useState(true);
-  const [cameraActive, setCameraActive] = useState(true);
-  const router = useRouter();
+   const [micActive, setMicActive] = useState(true);
+   const [cameraActive, setCameraActive] = useState(true);
+   const [screenShareActive, setScreenShareActive] = useState(false);
+   const router = useRouter();
 
-  const host = useRef(false);
-  const pusherRef = useRef();
-  const channelRef = useRef();
-
-  const rtcConnection = useRef();
-  const userStream = useRef();
-
-  const userVideo = useRef(null);
-  const partnerVideo = useRef(null);
+   const host = useRef(false);
+   const pusherRef = useRef();
+   const channelRef = useRef();
+   const rtcConnection = useRef();
+   const userStream = useRef();
+   const userVideo = useRef(null);
+   const partnerVideo = useRef(null);
 
   useEffect(() => {
     pusherRef.current = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
@@ -109,6 +108,20 @@ export default function Room({ userName, roomName }) {
     connection.onicecandidate = handleICECandidateEvent;
     connection.ontrack = handleTrackEvent;
     connection.onicecandidateerror = (e) => console.log(e);
+
+    if (screenShareActive) {
+      navigator.mediaDevices
+        .getDisplayMedia({ video: true }) // Get screen sharing stream
+        .then((stream) => {
+          stream.getTracks().forEach((track) => {
+            connection.addTrack(track, stream); // Add screen sharing track to connection
+          });
+        })
+        .catch((err) => {
+          console.error("Error accessing screen sharing:", err);
+        });
+    }
+
     return connection;
   };
 
@@ -169,13 +182,37 @@ export default function Room({ userName, roomName }) {
     partnerVideo.current.srcObject = event.streams[0];
   };
 
-  const toggleMediaStream = (type, state) => {
-    userStream.current?.getTracks().forEach((track) => {
-      if (track.kind === type) {
-        track.enabled = !state;
-      }
-    });
-  };
+   const toggleMediaStream = (type) => {
+     if (type === "screen") {
+       if (screenShareActive) {
+          console.log("Screen sharing stopped ", screenShareActive);
+         stopScreenShare();
+       } else {
+         navigator.mediaDevices
+           .getDisplayMedia({ video: true })
+           .then((stream) => {
+             userVideo.current.srcObject = stream;
+             userStream.current = stream;
+             stream.getTracks().forEach((track) => {
+               rtcConnection.current.addTrack(track, stream);
+             });
+              setScreenShareActive(!screenShareActive);
+            //  setScreenShareActive((prev)=>!prev)
+             console.log("Screen sharing started", screenShareActive);
+           })
+           .catch((error) => {
+             console.error("Error accessing screen sharing:", error);
+           });
+       }
+     } else if (type === "video") {
+       userStream.current?.getTracks().forEach((track) => {
+         if (track.kind === "video") {
+           track.enabled = !track.enabled;
+         }
+       });
+       setCameraActive((prev) => !prev);
+     }
+   };
 
   const handlePeerLeaving = () => {
     host.current = true;
@@ -223,6 +260,23 @@ export default function Room({ userName, roomName }) {
     setCameraActive((prev) => !prev);
   };
 
+ const stopScreenShare = () => {
+   if (screenShareActive) {
+     userVideo.current.srcObject = userStream.current;
+     userStream.current.getTracks().forEach((track) => {
+       if (track.kind === "video" && track.label === "screen") {
+         track.stop(); // Stop screen sharing track
+         rtcConnection.current.getSenders().forEach((sender) => {
+           if (sender.track === track) {
+             rtcConnection.current.removeTrack(sender); // Remove screen sharing track from RTC connection
+           }
+         });
+       }
+     });
+     setScreenShareActive(false);
+   }
+ };
+
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -242,6 +296,9 @@ export default function Room({ userName, roomName }) {
             </button>
             <button onClick={toggleCamera} type="button">
               {cameraActive ? "Stop Camera" : "Start Camera"}
+            </button>
+            <button onClick={() => toggleMediaStream("screen")} type="button">
+              {screenShareActive ? "Stop Screen Share" : "Start Screen Share"}
             </button>
           </div>
         </div>
