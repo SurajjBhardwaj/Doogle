@@ -10,6 +10,17 @@ import {
 } from "@/components/ui/hover-card";
 import Link from "next/link";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import QueryForm from "./QueryForm";
+
 const Home = () => {
   return (
     <section className="w-screen h-screen bg-purple-100 ">
@@ -20,7 +31,7 @@ const Home = () => {
           <HoverCard>
             <HoverCardTrigger asChild>
               <Button variant="link">
-                {" "}
+               
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/Profile.png" alt="profile" />
                   <AvatarFallback>CN</AvatarFallback>
@@ -67,12 +78,28 @@ const Home = () => {
                 </p>
                 <ArrowUpRight strokeWidth={1.5} />
               </Button>
-              <Button className="p-5 lg:p-6 px-7 lg:px-16  space-x-3  rounded-full  w-4/5 bg-white" variant="secondary">
+             
+
+              <Dialog>
+      <DialogTrigger asChild>
+      <Button className="p-5 lg:p-6 px-7 lg:px-16  space-x-3  rounded-full  w-4/5 bg-white" variant="secondary">
               <p className="text-base lg:text-xl font-light ">
               Match 
               </p>
                 <Code strokeWidth={1.5} />
               </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Select Following option</DialogTitle>
+         
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+         <QueryForm />
+        </div>
+        
+      </DialogContent>
+    </Dialog>
             </div>
           </div>
 
@@ -82,7 +109,8 @@ const Home = () => {
               src="/Home.png"
               height={400}
               width={700}
-              className="  drop-shadow-lg "
+              className="drop-shadow-lg"
+              alt='hero image'
             />
           </div>
         </div>
