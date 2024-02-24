@@ -1,3 +1,4 @@
+import { Link } from 'lucide-react';
 import React, { useState } from 'react';
 
 const Login = () => {
@@ -100,7 +101,7 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <p className="text-center text-gray-500 mt-4">Don't have an account? <a href="#" className="text-blue-500 hover:text-blue-600">Create Account</a></p>
+        <p className="text-center text-gray-500 mt-4">Don&apos;t have an account? <Link href="#" className="text-blue-500 hover:text-blue-600">Create Account</Link></p>
       </div>
     </div>
   );
