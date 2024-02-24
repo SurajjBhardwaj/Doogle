@@ -18,7 +18,7 @@ import React from 'react'
 function index() {
   return (
     <div className='bg-black'>
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
@@ -27,9 +27,9 @@ function index() {
       <Feature />
       <FAQ />
       <CTA />
-      <Footer />
+      <Footer /> */}
 
-      {/* <Home /> */}
+      <Home />
      
 
     </div>

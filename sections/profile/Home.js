@@ -53,11 +53,11 @@ const Home = () => {
               together!
             </p>
             <div class="mt-10 flex items-center justify-center gap-x-6">
-              <Button className="p-6 rounded-2xl text-base">
+              <Button className="p-6 px-16 rounded-2xl text-base">
                 Talk Instantly
               </Button>
-              <Button className="p-6 rounded-2xl text-base" variant="secondary">
-                Solve Ask Query
+              <Button className="p-6 px-24 rounded-2xl text-base" variant="secondary">
+               Match 
               </Button>
             </div>
           </div>
