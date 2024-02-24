@@ -28,6 +28,7 @@
     "mongoose": "^8.2.0",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
+    "nodemailer": "^6.9.10",
     "postcss": "8.4.35",
     "pusher": "^5.2.0",
     "pusher-js": "^8.4.0-rc2",
