@@ -337,7 +337,7 @@ export default function Room({ userName, roomName }) {
           </div>
           <div className=" rounded flex-1 ">
             <video
-              autoPla
+              autoPlay
               ref={partnerVideo}
               className="border-2 border-purple-900 rounded-2xl h-[42vh]"
             />

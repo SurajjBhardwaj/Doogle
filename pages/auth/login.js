@@ -43,8 +43,8 @@ const Login = () => {
         redirect: false, // Do not redirect on success
       });
 
-      // const result = await response.json();
-      // console.log(result);
+      const result = await response.json();
+      console.log(result);
 
       console.log(response);
 

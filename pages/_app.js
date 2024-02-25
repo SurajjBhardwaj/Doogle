@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import "@/styles/globals.css";
+import UserContextProvider from "@/context/userContextProvider";
 
 export default function App({ Component, pageProps }) {
   const [userName, setUserName] = useState("");
@@ -23,6 +24,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <SessionProvider session={pageProps.session}>
+    <UserContextProvider>
+
+   
       <Component
         handleCredChange={handleCredChange} // Pass the function directly
         userName={userName}
@@ -30,6 +34,7 @@ export default function App({ Component, pageProps }) {
         handleLogin={handleLogin}
         {...pageProps}
       />
+       </UserContextProvider>
     </SessionProvider>
   );
 }
