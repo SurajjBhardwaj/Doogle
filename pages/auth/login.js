@@ -33,18 +33,31 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
+      // const response = await signIn("credentials", {
+      //   email,
+      //   password,
+      //   redirect: false,
+      // });
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       });
-
-      console.log("response", response);
-
+      const result = await response.json();
+      console.log("result", result);
       if (response.ok) {
+        console.log("User authenticated:", result);
+        localStorage.setItem("user", JSON.stringify(result.data[0]));
         router.push("/");
+      } else {
+        console.error("Authentication error:", result);
       }
-
       setLoading(false);
     } catch (error) {
       console.error("Error:", error);
