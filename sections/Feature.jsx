@@ -36,7 +36,8 @@ export default function Feature() {
           Explore Doogle's Robust Features for Seamless Collaboration and
           Effective Debugging
         </p>
-        <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 lg:max-w-none grid grid-cols-2">
+        <span className="sr-only">Features</span>
+        <dl role="list" className="mt-10 max-w-xl space-y-8 text-base leading-7 lg:max-w-none grid grid-cols-2">
           {features.map((feature) => (
             <div key={feature.name} className="relative pl-9">
               {feature.icon}

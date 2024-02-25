@@ -22,6 +22,8 @@ export default function Footer() {
           >
             <h1>Connect with us</h1>
             <div id="links" className="flex flex-row justify-evenly w-full">
+            <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Linkedin</span>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +42,8 @@ export default function Footer() {
                   <circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
+              <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Instagram</span>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +62,8 @@ export default function Footer() {
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
               </a>
+              <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Twitter</span>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
