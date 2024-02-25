@@ -1,61 +1,59 @@
 import { Link } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router"; // Import useRouter hook from next/router
 
 const Login = () => {
-  // State variables for email, password, and loading status
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { data: session, status } = useSession(); // Get session data and status
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  // useEffect to handle session data changes
   useEffect(() => {
     if (status === "authenticated") {
-      // User is authenticated, redirect or perform necessary actions
+      console.log("session",session);
       console.log("User authenticated:", session);
+      router.push("/");
     } else if (status === "error") {
-      // Error occurred during authentication
       console.error("Authentication error:", session.error);
     }
-  }, [session, status]); // Listen for changes in session data and status
+  }, [session, status, router]);
 
-  // Event handler to update email state variable
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  // Event handler to update password state variable
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      // Sign in using NextAuth credentials provider
       const response = await signIn("credentials", {
         email,
         password,
-        redirect: false, // Do not redirect on success
+        redirect: false,
       });
 
       const result = await response.json();
       console.log(result);
 
-      console.log(response);
+      console.log("response", response);
 
-      // If signIn succeeds, the user is redirected automatically
-      // You can handle success in `useEffect` hook above
+
+      if (response.ok) {
+        router.push("/");
+      }
+
+      setLoading(false);
     } catch (error) {
       console.error("Error:", error);
-      // Handle login failure
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -97,24 +95,25 @@ const Login = () => {
               className="w-full border rounded-md py-2 px-3 text-gray-700 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+          {/* Additional field for forget password */}
           <div className="mt-10">
-            <a
+            <Link
               href="#"
               className="-mt-4 text-blue-500 hover:text-blue-600 block text-right"
             >
-              Forget Password?
-            </a>
+              Forgot Password?
+            </Link>
           </div>
           <button
             type="submit"
-            disabled={loading} // Disable button while loading
+            disabled={loading}
             className={`bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-          <p className="text-center text-gray-500 mt-4">Or login with</p>
+          {/* Buttons for logging in with Google and GitHub */}
           <div>
             <button
               type="button"

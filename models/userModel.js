@@ -21,7 +21,19 @@ const expertiseSchema = new mongoose.Schema({
     type: String,
     enum: ["Exploring", "Beginner", "Intermediate", "Expert"],
   },
-  topics: [],
+  topics: [String], // Assuming topics is an array of strings
+});
+
+
+const querySchema = new mongoose.Schema({
+  language: {
+    type: String,
+  },
+  level: {
+    type: String,
+    enum: ["Exploring", "Beginner", "Intermediate", "Expert"],
+  },
+  topics: [String],
 });
 
 const userSchema = new mongoose.Schema(
@@ -33,6 +45,21 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true, // Ensure unique email addresses
+    },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    otp: {
+      type: String,
+      default: "",
+    },
+    otpExpiry: {
+      type: Date,
+    },
+    otpCreationTime: {
+      type: Date,
     },
     password: {
       type: String,
@@ -46,6 +73,34 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    socketInfo: {
+      id: {
+        type: String,
+        default: "",
+      },
+      online: {
+        type: Boolean,
+        default: false,
+      },
+      roomName: {
+        type: String,
+        default: "",
+      }
+    },
+    messages: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message", // Assuming there's a Message model for chat messages
+      },
+    ],
+    connection: {
+      type: Boolean,
+      default: false,
+    },
+    connectionType: {
+      type: String,
+    },
+    query: querySchema,
     expertise: [expertiseSchema],
     streaks: [streakSchema], // Adding streaks to the user schema
   },
@@ -54,5 +109,3 @@ const userSchema = new mongoose.Schema(
 
 mongoose.models = {};
 export default mongoose.model("user", userSchema);
-
-
