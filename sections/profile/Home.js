@@ -25,9 +25,9 @@ const Home = () => {
   return (
     <section className="w-screen h-screen bg-purple-100 ">
       <div className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2">
-        <header className="h-14 flex w-full justify-between py-4">
-          <Image height={100} width={200} src="/Doogle.svg" alt="logo" className=" self-start h-12 w-[6rem] lg:h-16 lg:w-32" />
-
+        <header className=" h-14 flex w-full justify-between py-4">
+         
+        <Image height={100} width={200} src="/Doogle.svg" alt="logo" className="  self-start h-12 w-[6rem] lg:h-16 lg:w-32" />
           <HoverCard>
             <HoverCardTrigger asChild>
               <Button variant="link">

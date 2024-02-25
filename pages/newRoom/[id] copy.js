@@ -1,20 +1,6 @@
 import { useRouter } from "next/router";
 import Pusher from "pusher-js";
 import { useEffect, useRef, useState } from "react";
-import { Mic } from "lucide-react";
-import { MicOff } from "lucide-react";
-import { Phone } from "lucide-react";
-import { Camera } from "lucide-react";
-import { CameraOff } from "lucide-react";
-import { MonitorUp } from "lucide-react";
-import { MonitorOff } from "lucide-react";
-import { SkipForward } from "lucide-react";
-import { SendHorizontal } from 'lucide-react';
-import { MessageCircleCode } from 'lucide-react';
-import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { X } from 'lucide-react';
-
 
 const ICE_SERVERS = {
   iceServers: [
@@ -31,7 +17,6 @@ const ICE_SERVERS = {
 };
 
 export default function Room({ userName, roomName }) {
-  const [showChat , setShowChat] = useState(false)
   const [micActive, setMicActive] = useState(true);
   const [cameraActive, setCameraActive] = useState(true);
   const [screenShareActive, setScreenShareActive] = useState(false);
@@ -313,121 +298,58 @@ export default function Room({ userName, roomName }) {
   };
 
   return (
-    <section className="relative w-screen h-screen bg-[#1A1A1A] ">
-      <div className=" mx-auto max-w-screen-2xl p-4">
-        <Image
-          height={100}
-          width={200}
-          src="/Doogle.svg"
-          alt="logo"
-          className=" absolute self-start h-12 w-[6rem] lg:h-16 lg:w-32"
-        />
-
-        <div className="flex gap-4 h-[90vh]  w-[93vw] items-center">
-          <div className=" rounded flex-1  ">
-            <video
-              autoPlay
-              ref={userVideo}
-              muted
-              className="border-2 
-            width-auto
-            border-purple-900 rounded-2xl h-[42vh]"
-              // style={{ width: "100%", border: "1px solid #ccc" }}
-            />
-          </div>
-          <div className=" rounded flex-1 ">
-            <video
-              autoPla
-              ref={partnerVideo}
-              className="border-2 border-purple-900 rounded-2xl h-[42vh]"
-            />
-          </div>
-          {/* chat */}
-          {
-            showChat ?<div className="flex flex-col justify-between bg-purple-100 h-[90vh]  rounded-sm p-4  w-[15vw]">
-           <div>
-           <div className="mb-2 self-end">
-            <X onClick={()=>setShowChat(!showChat)} />
-            </div>
-          <div style={{ overflowY: "scroll", height: "200px" }}>
-            {messages.map((msg, index) => (
-              <div key={index} className="flex flex-col gap-2">
-              <div>
-              <strong>{msg.user} </strong>
-              </div>
-              <div>
-              <span className="rounded-sm my-1 shadow-2xl text-black bg-white px-6 py-1 ">{msg.text}</span>
-              </div>
-                
-              </div>
-            ))}
-          </div>
-           </div>
-          <div className="relative h-12">
-          <Input
-          className='bg-purple-200'
-          placeholder='Send a message'
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
+    <section className="w-screen h-screen bg-purple-100 ">
+      <div className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2">
+      <div className="flex">
+        <div style={{ flex: 1, margin: "0 10px" }}>
+          <video
+            autoPlay
+            ref={userVideo}
+            muted
+            style={{ width: "100%", border: "1px solid #ccc" }}
           />
-          <button className="absolute right-2 top-2 text-gray-600" onClick={sendMessage}><SendHorizontal /></button>
+          <div style={{ textAlign: "center", marginTop: "10px" }}>
+            <button onClick={toggleMic} type="button">
+              {micActive ? "Mute Mic" : "UnMute Mic"}
+            </button>
+            <button onClick={leaveRoom} type="button">
+              Leave
+            </button>
+            <button onClick={toggleCamera} type="button">
+              {cameraActive ? "Stop Camera" : "Start Camera"}
+            </button>
+            <button onClick={() => toggleMediaStream("screen")} type="button">
+              {screenShareActive ? "Stop Screen Share" : "Start Screen Share"}
+            </button>
           </div>
-        
-        </div> : 
-        <div className="absolute bottom-[10%] right-10  text-white ">
-       
         </div>
-       
-          }
-        
+        <div style={{ flex: 1, margin: "0 10px" }}>
+          <video
+            autoPlay
+            ref={partnerVideo}
+            style={{ width: "100%", border: "1px solid #ccc" }}
+          />
         </div>
-        <div className="absolute bottom-[2rem] left-[40%] flex items-center justify-center gap-3 mx-auto rounded-full h-14  max-w-md backdrop-grayscale  text-white   px-16 p-2">
-          <button
-            onClick={toggleCamera}
-            type="button"
-            className="rounded-full bg-white/10 p-3"
-          >
-            {cameraActive ? <CameraOff /> : <Camera />}
-          </button>
-          <button
-            onClick={toggleMic}
-            type="button"
-            className="rounded-full bg-white/10 p-3"
-          >
-            {micActive ? <Mic /> : <MicOff />}
-          </button>
-
-          <button
-            onClick={() => toggleMediaStream("screen")}
-            type="button"
-            className="rounded-full bg-white/10 p-3"
-          >
-            {screenShareActive ? <MonitorOff /> : <MonitorUp />}
-          </button>
-          <button
-           onClick={()=>setShowChat(!showChat)}
-            type="button"
-            className="rounded-full bg-white/10 p-3"
-          >
-            <MessageCircleCode  /> 
-          </button>
-          <button type="button" className="rounded-full bg-white/10 p-3">
-            <SkipForward />
-          </button>
-
-          <button
-            onClick={leaveRoom}
-            type="button"
-            className="rounded-full bg-[#EA4335] p-3"
-          >
-            <Phone className="fill-white stroke-white rotate-25" />
-          </button>
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <div style={{ overflowY: "scroll", height: "200px" }}>
+          {messages.map((msg, index) => (
+            <div key={index}>
+              <strong>{msg.user}: </strong>
+              <span>{msg.text}</span>
+            </div>
+          ))}
         </div>
-
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") sendMessage();
+          }}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
       </div>
     </section>
   );
