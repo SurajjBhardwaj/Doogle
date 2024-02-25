@@ -49,8 +49,18 @@ const Login = () => {
           password,
         }),
       });
+<<<<<<< HEAD
       const result = await response.json();
       console.log("result", result);
+=======
+
+      const result = await response.json();
+      console.log(result);
+
+      console.log("response", response);
+
+
+>>>>>>> 9ef96f956ad8326dae1183851b09edd027f868cc
       if (response.ok) {
         console.log("User authenticated:", result);
         localStorage.setItem("user", JSON.stringify(result.data[0]));
