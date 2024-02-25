@@ -41,11 +41,11 @@ function QueryForm() {
   const router = useRouter();
   const { toast } = useToast();
   const [isloading, setIsLoading] = useState();
-  const linkId =  "uy237rtg" ||Math.random().toString(36).slice(2);
+  let linkId =  Math.random().toString(36).slice(2);
 
   const initialFormState = {
     who:undefined,
- techStack:[],
+ techStack:undefined,
  levelQues:undefined,
  interest:undefined,
  
@@ -58,48 +58,51 @@ function QueryForm() {
 
   async function myhandleSubmit(value) {
     console.log(value)
-    // try {
-    //   setIsLoading(true);
-    //   const response = await fetch("/api/email", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(value),
-    //   });
-    //   console.log("response", response);
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/idProvider", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      });
+      console.log("response", response);
   
-    //   const newResult = await response.json();
-    //   console.log("new result:",newResult);
+      const newResult = await response.json();
+      console.log("new result:",newResult);
+      linkId = newResult.roomId;
+
      
-    //   if (response.ok) {
+      if (response.ok) {
         
-    //     setIsLoading(false);
-    //     displayToast('Successfully Sent', "✅" ,"Thanks for your email, we will get back to you soon");
-    //     form.reset(initialFormState);
-    //   } else {
-    //     console.error("Error:", newResult.message);
-    //     displayToast("Error", "❌", newResult.message);
-    //     setIsLoading(false);
-    //   }
-    // } catch (error) {
-    //   console.error("Error Server:", error);
+        setIsLoading(false);
+        router.push(`/newRoom/${linkId}`);
+        displayToast('Successfully Sent', "✅" ,"Thanks for your email, we will get back to you soon");
+        form.reset(initialFormState);
+      } else {
+        console.error("Error:", newResult.message);
+        displayToast("Error", "❌", newResult.message);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error("Error Server:", error);
      
 
-    //   displayToast("Error while sending data", "❌", error.message); 
+      displayToast("Error while sending data", "❌", error.message); 
 
-    //   setIsLoading(false);
-    //   router.push(`/newRoom/${linkId}`)
-    // }
+      setIsLoading(false);
+      router.push(`/newRoom/${linkId}`)
+    }
 
-    // form.reset(initialFormState);
+    form.reset(initialFormState);
 
-    setIsLoading(true);
-    setTimeout(() => {
-       setIsLoading(false)
-      router.push(`/newRoom/${linkId}`);
+    // setIsLoading(true);
+    // setTimeout(() => {
+    //    setIsLoading(false)
+    //   router.push(`/newRoom/${linkId}`);
 
-    }, 6900);
+    // }, 6900);
    
   }
   
@@ -148,19 +151,34 @@ function QueryForm() {
               );
             }}
           />
-          <FormField
+            <FormField
             control={form.control}
             name="techStack"
             render={({ field }) => {
               return (
                 <FormItem className="flex flex-col items-start justify-start space-y-1">
                   <FormLabel className="text-slate-600 text-nowrap text-sm lg:text-base ">
-                    Tech Stack :
+                Join as a:
                   </FormLabel>
-
-                  <FormControl>
-                    <Input {...field} placeholder="Enter your tech stack" />
-                  </FormControl>
+                  <Select
+                    className="flex flex-1 flex-col"
+                    onValueChange={field.onChange}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your tech stack" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="React">React</SelectItem>
+                      <SelectItem value="c++">c++</SelectItem>
+                      <SelectItem value="python">python</SelectItem>
+                      <SelectItem value="java">java</SelectItem>
+                      <SelectItem value="Javascript">Javascript</SelectItem>
+                      <SelectItem value="Android">Android</SelectItem>
+                      
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>
