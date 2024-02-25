@@ -9,8 +9,12 @@ import { CameraOff } from "lucide-react";
 import { MonitorUp } from "lucide-react";
 import { MonitorOff } from "lucide-react";
 import { SkipForward } from "lucide-react";
-
+import { SendHorizontal } from 'lucide-react';
+import { MessageCircleCode } from 'lucide-react';
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { X } from 'lucide-react';
+
 
 const ICE_SERVERS = {
   iceServers: [
@@ -27,6 +31,7 @@ const ICE_SERVERS = {
 };
 
 export default function Room({ userName, roomName }) {
+  const [showChat , setShowChat] = useState(false)
   const [micActive, setMicActive] = useState(true);
   const [cameraActive, setCameraActive] = useState(true);
   const [screenShareActive, setScreenShareActive] = useState(false);
@@ -309,7 +314,7 @@ export default function Room({ userName, roomName }) {
 
   return (
     <section className="relative w-screen h-screen bg-[#1A1A1A] ">
-      <div className=" mx-auto max-w-screen-2xl px-8 md:px-8 py-8">
+      <div className=" mx-auto max-w-screen-2xl p-4">
         <Image
           height={100}
           width={200}
@@ -318,7 +323,7 @@ export default function Room({ userName, roomName }) {
           className=" absolute self-start h-12 w-[6rem] lg:h-16 lg:w-32"
         />
 
-        <div className="flex gap-4 h-[90vh] justify-center items-center">
+        <div className="flex gap-4 h-[90vh]  w-[93vw] items-center">
           <div className=" rounded flex-1  ">
             <video
               autoPlay
@@ -337,6 +342,48 @@ export default function Room({ userName, roomName }) {
               className="border-2 border-purple-900 rounded-2xl h-[42vh]"
             />
           </div>
+          {/* chat */}
+          {
+            showChat ?<div className="flex flex-col justify-between bg-purple-100 h-[90vh]  rounded-sm p-4  w-[15vw]">
+           <div>
+           <div className="mb-2 self-end">
+            <X onClick={()=>setShowChat(!showChat)} />
+            </div>
+          <div style={{ overflowY: "scroll", height: "200px" }}>
+            {messages.map((msg, index) => (
+              <div key={index} className="flex flex-col gap-2">
+              <div>
+              <strong>{msg.user} </strong>
+              </div>
+              <div>
+              <span className="rounded-sm my-1 shadow-2xl text-black bg-white px-6 py-1 ">{msg.text}</span>
+              </div>
+                
+              </div>
+            ))}
+          </div>
+           </div>
+          <div className="relative h-12">
+          <Input
+          className='bg-purple-200'
+          placeholder='Send a message'
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") sendMessage();
+            }}
+          />
+          <button className="absolute right-2 top-2 text-gray-600" onClick={sendMessage}><SendHorizontal /></button>
+          </div>
+        
+        </div> : 
+        <div className="absolute bottom-[10%] right-10  text-white ">
+       
+        </div>
+       
+          }
+        
         </div>
         <div className="absolute bottom-[2rem] left-[40%] flex items-center justify-center gap-3 mx-auto rounded-full h-14  max-w-md backdrop-grayscale  text-white   px-16 p-2">
           <button
@@ -361,6 +408,13 @@ export default function Room({ userName, roomName }) {
           >
             {screenShareActive ? <MonitorOff /> : <MonitorUp />}
           </button>
+          <button
+           onClick={()=>setShowChat(!showChat)}
+            type="button"
+            className="rounded-full bg-white/10 p-3"
+          >
+            <MessageCircleCode  /> 
+          </button>
           <button type="button" className="rounded-full bg-white/10 p-3">
             <SkipForward />
           </button>
@@ -374,25 +428,6 @@ export default function Room({ userName, roomName }) {
           </button>
         </div>
 
-        <div style={{ marginTop: "20px" }}>
-          <div style={{ overflowY: "scroll", height: "200px" }}>
-            {messages.map((msg, index) => (
-              <div key={index}>
-                <strong>{msg.user}: </strong>
-                <span className="text-black">{msg.text}</span>
-              </div>
-            ))}
-          </div>
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
-          />
-          <button onClick={sendMessage}>Send</button>
-        </div>
       </div>
     </section>
   );
