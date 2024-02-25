@@ -5,7 +5,7 @@ Welcome to Doogle, the ultimate platform for collaborative coding and knowledge 
 
 Getting Started
 Sign Up for Doogle
-Visit www.doogle.com.
+Visit https://doogle-mu.vercel.app
 Click on "Sign Up" and follow the on-screen instructions.
 Personalize your profile with a picture and a brief bio.
 Explore Collaborative Coding
@@ -65,52 +65,58 @@ Use Cases
 
 Initial command to run 
 
-```bash
-  npm install
-  cd Doogle
-```
-    
-## Deployment
 
-To deploy this project run
+Step 1. clone it using ```git clone https://github.com/SurajjBhardwaj/Doogle.git```
 
-```bash
-  npm run dev
-```
+Step 2. npm install
+
+Step 3. cd Doogle
+
+step 4. use ```code . ``` or open in vs code any how
+
+step 5. Crete a .env.local file in your root directory (Use .env.example for reference)
+
+step 6. And All done, run command ``` Npm run dev ``` in the command terminal
+
+congratulations the project is running at ```http://localhost:3000```
 
 
-```
 
 
 ## FAQ
 
-#### What is the purpose of this platform?
+#### 1. What is the purpose of this platform?
 
 Our platform connects developers based on their interests and expertise, fostering a collaborative environment for problem-solving and knowledge sharing.
 
-#### How does the matching algorithm work?
+#### 2. How does the matching algorithm work?
 
 Our algorithm analyzes user interests and expertise levels to pair individuals seeking help with those who have the relevant knowledge and are willing to assist.
 
-#### How can I join and start using the platform?
+#### 3. How can I join and start using the platform?
 
 Simply sign up with your developer profile, specifying your interests and expertise. You'll then be matched with others based on your preferences.
 
-#### What kind of assistance can I seek or offer?
+#### 4. What kind of assistance can I seek or offer?
 
 Users can seek help with coding challenges, debugging, project guidance, or any developer-related queries. You can offer assistance in these areas based on your expertise.
 
-#### How are credits or experience points earned?
+#### 5. How are credits or experience points earned?
 
 When a user seeking help is satisfied with the assistance received, they can approve the solution, and credits or experience points are awarded to the solver.
 
-#### Is the platform only for experienced developers?
+#### 6. Is the platform only for experienced developers?
 
 No, developers of all levels are welcome! Whether you're a beginner seeking guidance or an experienced developer looking to help others, our platform caters to a diverse audience.
 
-#### Is my information and data secure on the platform?
+#### 7. Is my information and data secure on the platform?
 
 Absolutely. We prioritize user privacy and data security. All interactions and personal information are handled with the utmost care and follow industry-standard security measures.
+
+
+<H2>Give it the star, it's Worth it </H2>
+<h1>A big thanks to the team Of this PRoject ♥ </h1>
+
 
 
 
