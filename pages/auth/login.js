@@ -39,7 +39,11 @@ const Login = () => {
         redirect: false,
       });
 
+      const result = await response.json();
+      console.log(result);
+
       console.log("response", response);
+
 
       if (response.ok) {
         router.push("/");
