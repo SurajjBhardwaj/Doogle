@@ -22,13 +22,15 @@ import {
 import { useContext, useEffect, useState } from "react";
 
 // import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { Link, Send } from "lucide-react";
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
+// import Link from "next/link";
+import { useRouter } from "next/router";
 
 const formSchema = z.object({
  who:z.string(),
- techStack:z.string,
+ techStack:z.string(),
  
  levelQues:z.string(),
  interest:z.string(),
@@ -36,9 +38,10 @@ const formSchema = z.object({
 });
 
 function QueryForm() {
+  const router = useRouter();
   const { toast } = useToast();
   const [isloading, setIsLoading] = useState();
-  const linkId = Math.random().toString(36).slice(2);
+  const linkId =  "uy237rtg" ||Math.random().toString(36).slice(2);
 
   const initialFormState = {
     who:undefined,
@@ -52,69 +55,52 @@ function QueryForm() {
     defaultValues: initialFormState,
   });
 
-//   const techStacks= form.watch('techStack' ,'');
-
-//   function convertArray() {
-//     const myString = form.getValues('techStack' );
-
-
-//     if (myString) {
-       
-//         let items = myString.split(',');
-
-        
-//         items = items.map(item => item.trim());
-
-//         return items;
-//     } else {
-       
-//         console.error('Input is not a string');
-//         return [];
-//     }
-// }
-
-
-//   useEffect(()=>{
-//    const result = convertArray();
-//    form.setValue('techStack2' ,result);
-
-//   },[techStacks])
 
   async function myhandleSubmit(value) {
     console.log(value)
-    try {
-      setIsLoading(true);
-      const response = await fetch("/api/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(value),
-      });
-      console.log("response", response);
+    // try {
+    //   setIsLoading(true);
+    //   const response = await fetch("/api/email", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(value),
+    //   });
+    //   console.log("response", response);
   
-      const newResult = await response.json();
-      console.log("new result:",newResult);
-  
-      if (response.ok) {
-        setIsLoading(false);
-        displayToast('Successfully Sent', "✅" ,"Thanks for your email, we will get back to you soon");
-        form.reset(initialFormState);
-      } else {
-        console.error("Error:", newResult.message);
-        displayToast("Error", "❌", newResult.message);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.error("Error Server:", error);
+    //   const newResult = await response.json();
+    //   console.log("new result:",newResult);
+     
+    //   if (response.ok) {
+        
+    //     setIsLoading(false);
+    //     displayToast('Successfully Sent', "✅" ,"Thanks for your email, we will get back to you soon");
+    //     form.reset(initialFormState);
+    //   } else {
+    //     console.error("Error:", newResult.message);
+    //     displayToast("Error", "❌", newResult.message);
+    //     setIsLoading(false);
+    //   }
+    // } catch (error) {
+    //   console.error("Error Server:", error);
      
 
-      displayToast("Error while sending data", "❌", error.message); 
+    //   displayToast("Error while sending data", "❌", error.message); 
 
-      setIsLoading(false);
-    }
+    //   setIsLoading(false);
+    //   router.push(`/newRoom/${linkId}`)
+    // }
 
-    form.reset(initialFormState);
+    // form.reset(initialFormState);
+
+    setIsLoading(true);
+    setTimeout(() => {
+       setIsLoading(false)
+      router.push(`/newRoom/${linkId}`);
+
+    }, 6900);
+   
   }
   
   const displayToast = (title, action, description = "") => {
@@ -173,7 +159,7 @@ function QueryForm() {
                   </FormLabel>
 
                   <FormControl>
-                    <Input {...field} placeholder="Enter your name" />
+                    <Input {...field} placeholder="Enter your tech stack" />
                   </FormControl>
 
                   <FormMessage />
@@ -223,7 +209,7 @@ function QueryForm() {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="Enter your name"
+                      placeholder="Enter your interest"
                       
                     />
                   </FormControl>
@@ -238,8 +224,10 @@ function QueryForm() {
             type="submit"
            className='rounded-full'
           >
-            {/* <Send strokeWidth={1} /> */}
+           {/* <Link href={`/newRoom/${linkId}`} className="flex gap-4"> */}
+           
             <span>{isloading ? "Loading..." : "Join "}</span>
+            {/* </Link> */}
           </Button>
         </form>
       </Form>

@@ -1,6 +1,7 @@
+"use State";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowUpRight, CircleUserRound, Code } from "lucide-react";
 import {
@@ -18,22 +19,37 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import QueryForm from "./QueryForm";
+import { useRouter } from "next/router";
 
 const Home = () => {
-  const linkId = 136435|| Math.random().toString(36).slice(2);
+  const linkId = "i7y24hf" || Math.random().toString(36).slice(2);
+  const router = useRouter();
+  const [isloading, setIsLoading] = useState();
+
+  async function handleConnect() {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push(`/newRoom/${linkId}`);
+    }, 7700);
+  }
 
   return (
     <section className="w-screen h-screen bg-purple-100 ">
       <div className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2">
         <header className=" h-14 flex w-full justify-between py-4">
-         
-        <Image height={100} width={200} src="/Doogle.svg" alt="logo" className="  self-start h-12 w-[6rem] lg:h-16 lg:w-32" />
+          <Image
+            height={100}
+            width={200}
+            src="/Doogle.svg"
+            alt="logo"
+            className="  self-start h-12 w-[6rem] lg:h-16 lg:w-32"
+          />
           <HoverCard>
             <HoverCardTrigger asChild>
               <Button variant="link">
-               
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/Profile.png" alt="profile" />
                   <AvatarFallback>CN</AvatarFallback>
@@ -59,53 +75,50 @@ const Home = () => {
           <div class=" flex flex-col  justify-center">
             <span class="text-center text-3xl text-nowrap lg:text-left lg:text-6xl font-extrabold tracking-tight text-gray-900 ">
               <h1>Connect with Developer</h1>
-              <h1 >Anywhere, Anytime</h1>
+              <h1>Anywhere, Anytime</h1>
             </span>
             <p className=" text-center lg:text-left  mt-6 px-4 text-sm lg:text-xl  text-gray-600">
-              Elevate your coding journey with  developers .
-               
+              Elevate your coding journey with developers .
             </p>
             <p className=" text-center lg:text-left  px-4 text-sm lg:text-xl  text-gray-600">
-            Let&apos;s connect and grow
-              together!
+              Let&apos;s connect and grow together!
             </p>
             <div class="mt-10 flex flex-col gap-y-4 lg:flex-row items-center lg:gap-x-4">
-           
-  
-
-              <Button className="p-5 lg:p-6 px-7 lg:px-16 rounded-full space-x-1 w-4/5">
-             <Link href={`/newRoom/${linkId}`}>
-             <p className="text-base lg:text-xl font-light ">
-                Talk Instantly 
-                </p>
-                <ArrowUpRight strokeWidth={1.5} />
-             </Link>
-               
+              <Button
+                className="p-5 lg:p-6 px-7 lg:px-16 rounded-full space-x-1 w-4/5"
+                onClick={handleConnect}
+              >
+                {isloading ? (
+                  "Loading..."
+                ) : (
+                  <div className="flex gap-3">
+                    <p className="text-base lg:text-xl font-light ">
+                      Talk Instantly
+                    </p>
+                    <ArrowUpRight strokeWidth={1.5} />
+                  </div>
+                )}
               </Button>
-             
 
               <Dialog>
-      <DialogTrigger asChild>
-      <Button className="p-5 lg:p-6 px-7 lg:px-16  space-x-3  rounded-full  w-4/5 bg-white" variant="secondary">
-      <Link href={`/newRoom/${linkId}`}>
-              <p className="text-base lg:text-xl font-light ">
-              Match 
-              </p>
-                <Code strokeWidth={1.5} />
-                </Link>
-              </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Select Following option</DialogTitle>
-         
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-         <QueryForm />
-        </div>
-        
-      </DialogContent>
-    </Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    className="p-5 lg:p-6 px-7 lg:px-16  space-x-3  rounded-full  w-4/5 bg-white"
+                    variant="secondary"
+                  >
+                    <p className="text-base lg:text-xl font-light ">Match</p>
+                    <Code strokeWidth={1.5} />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Select Following option</DialogTitle>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <QueryForm />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
 
@@ -116,7 +129,7 @@ const Home = () => {
               height={400}
               width={700}
               className="drop-shadow-lg"
-              alt='hero image'
+              alt="hero image"
             />
           </div>
         </div>
