@@ -22,6 +22,8 @@ import {
 import QueryForm from "./QueryForm";
 
 const Home = () => {
+  const linkId = 136435|| Math.random().toString(36).slice(2);
+
   return (
     <section className="w-screen h-screen bg-purple-100 ">
       <div className="mx-auto max-w-screen-2xl px-8 md:px-16 py-2">
@@ -72,21 +74,25 @@ const Home = () => {
   
 
               <Button className="p-5 lg:p-6 px-7 lg:px-16 rounded-full space-x-1 w-4/5">
-             
-                <p className="text-base lg:text-xl font-light ">
+             <Link href={`/newRoom/${linkId}`}>
+             <p className="text-base lg:text-xl font-light ">
                 Talk Instantly 
                 </p>
                 <ArrowUpRight strokeWidth={1.5} />
+             </Link>
+               
               </Button>
              
 
               <Dialog>
       <DialogTrigger asChild>
       <Button className="p-5 lg:p-6 px-7 lg:px-16  space-x-3  rounded-full  w-4/5 bg-white" variant="secondary">
+      <Link href={`/newRoom/${linkId}`}>
               <p className="text-base lg:text-xl font-light ">
               Match 
               </p>
                 <Code strokeWidth={1.5} />
+                </Link>
               </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

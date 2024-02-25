@@ -38,12 +38,14 @@ const formSchema = z.object({
 function QueryForm() {
   const { toast } = useToast();
   const [isloading, setIsLoading] = useState();
+  const linkId = Math.random().toString(36).slice(2);
 
   const initialFormState = {
     who:undefined,
  techStack:[],
  levelQues:undefined,
  interest:undefined,
+ 
   };
   const form = useForm({
     resolver: zodResolver(formSchema),
