@@ -19,12 +19,12 @@ import Head from 'next/head'
 function index() {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Doogle</title>
         <meta name="description" content="Connect, collaborate, and grow with developers worldwide on our platform designed for seamless knowledge exchange and problem-solving." />
         <link rel='favicon' src="/removebg-preview 1.ico" />
-      </Head>
-      <Navbar />
+      </Head> */}
+      {/* <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
@@ -33,9 +33,9 @@ function index() {
       <Feature />
       <FAQ />
       <CTA />
-      <Footer />
+      <Footer /> */}
 
-      {/* <Home /> */}
+      <Home />
      
 
     </>
