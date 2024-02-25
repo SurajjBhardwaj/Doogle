@@ -3,8 +3,19 @@ import Pusher from "pusher-js";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { X } from 'lucide-react';
-import { Mic, MicOff, Phone, Camera, CameraOff, MonitorUp, MonitorOff, SkipForward, SendHorizontal, MessageCircleCode } from "lucide-react";
+import { X } from "lucide-react";
+import {
+  Mic,
+  MicOff,
+  Phone,
+  Camera,
+  CameraOff,
+  MonitorUp,
+  MonitorOff,
+  SkipForward,
+  SendHorizontal,
+  MessageCircleCode,
+} from "lucide-react";
 
 const ICE_SERVERS = {
   iceServers: [
@@ -345,7 +356,9 @@ export default function Room({ userName, roomName }) {
                         <strong>{msg.user} </strong>
                       </div>
                       <div>
-                        <span className="rounded-sm my-1 shadow-2xl text-black bg-white px-6 py-1 ">{msg.text}</span>
+                        <span className="rounded-sm my-1 shadow-2xl text-black bg-white px-6 py-1 ">
+                          {msg.text}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -353,8 +366,8 @@ export default function Room({ userName, roomName }) {
               </div>
               <div className="relative h-12">
                 <Input
-                  className='bg-purple-200'
-                  placeholder='Send a message'
+                  className="bg-purple-200"
+                  placeholder="Send a message"
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -362,12 +375,16 @@ export default function Room({ userName, roomName }) {
                     if (e.key === "Enter") sendMessage();
                   }}
                 />
-                <button className="absolute right-2 top-2 text-gray-600" onClick={sendMessage}><SendHorizontal /></button>
+                <button
+                  className="absolute right-2 top-2 text-gray-600"
+                  onClick={sendMessage}
+                >
+                  <SendHorizontal />
+                </button>
               </div>
             </div>
           ) : (
-            <div className="absolute bottom-[10%] right-10  text-white ">
-            </div>
+            <div className="absolute bottom-[10%] right-10  text-white "></div>
           )}
         </div>
         <div className="absolute bottom-[2rem] left-[40%] flex items-center justify-center gap-3 mx-auto rounded-full h-14  max-w-md backdrop-grayscale  text-white   px-16 p-2">
@@ -414,4 +431,3 @@ export default function Room({ userName, roomName }) {
     </section>
   );
 }
-
