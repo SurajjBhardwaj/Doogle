@@ -63,7 +63,12 @@ const Home = () => {
                 <Button variant="outline" className="rounded-xl ">
                   <Link href="/profile">View Profile</Link>
                 </Button>
-                <Button className="rounded-xl ">Sign Out</Button>
+                <Button className="rounded-xl ">
+                <Link href='/landingpage'>
+                Sign Out
+                </Link>
+                
+                </Button>
               </div>
             </HoverCardContent>
           </HoverCard>
