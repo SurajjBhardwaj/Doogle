@@ -148,21 +148,35 @@ export default function Room({ userName, roomName }) {
   };
 
   const initiateCall = () => {
-    if (host.current) {
-      rtcConnection.current = createPeerConnection();
-      userStream.current?.getTracks().forEach((track) => {
-        rtcConnection.current?.addTrack(track, userStream.current);
-      });
-      rtcConnection.current
-        .createOffer()
-        .then((offer) => {
-          rtcConnection.current.setLocalDescription(offer);
-          channelRef.current.trigger("client-offer", offer);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    // Create RTCPeerConnection
+  rtcConnection.current = createPeerConnection();
+
+  // Add local audio and video tracks
+  userStream.current.getTracks().forEach((track) => {
+    rtcConnection.current.addTrack(track, userStream.current);
+  });
+
+  // Include screen share track if active
+  if (screenShareActive) {
+    userStream.current.getTracks().forEach((track) => {
+      if (track.kind === "video" && track.label === "screen") {
+        rtcConnection.current.addTrack(track, userStream.current);
+      }
+    });
+  }
+
+  // Create offer
+  rtcConnection.current
+    .createOffer()
+    .then((offer) => {
+      rtcConnection.current.setLocalDescription(offer);
+
+      // Send offer through signaling channel (e.g., Pusher)
+      channelRef.current.trigger("client-offer", offer);
+    })
+    .catch((error) => {
+      console.error("Error creating offer:", error);
+    });
   };
 
   const handleReceivedOffer = (offer) => {
@@ -206,25 +220,32 @@ export default function Room({ userName, roomName }) {
 
   const toggleMediaStream = (type) => {
     if (type === "screen") {
-      if (screenShareActive) {
-        console.log("Screen sharing stopped ", screenShareActive);
-        stopScreenShare();
-      } else {
-        navigator.mediaDevices
-          .getDisplayMedia({ video: true })
-          .then((stream) => {
-            userVideo.current.srcObject = stream;
-            userStream.current = stream;
+    if (screenShareActive) {
+      console.log("Screen sharing stopped ", screenShareActive);
+      stopScreenShare();
+    } else {
+      navigator.mediaDevices
+        .getDisplayMedia({ video: true })
+        .then((stream) => {
+          userVideo.current.srcObject = stream;
+          userStream.current = stream;
+
+          // Include the screen share track in the RTCPeerConnection
+          if (rtcConnection.current) {
             stream.getTracks().forEach((track) => {
               rtcConnection.current.addTrack(track, stream);
             });
-            setScreenShareActive(!screenShareActive);
-            console.log("Screen sharing started", screenShareActive);
-          })
-          .catch((error) => {
-            console.error("Error accessing screen sharing:", error);
-          });
-      }
+          } else {
+            console.warn("RTC peer connection not yet established for screen sharing.");
+          }
+
+          setScreenShareActive(!screenShareActive);
+          console.log("Screen sharing started", screenShareActive);
+        })
+        .catch((error) => {
+          console.error("Error accessing screen sharing:", error);
+        });
+    }
     } else if (type === "video") {
       userStream.current?.getTracks().forEach((track) => {
         if (track.kind === "video") {
