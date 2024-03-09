@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Beginner = () => {
   return (
-    <section className='w-screen p-10 bg-black text-purple-200 '>
+    <section id='doogle' className='w-screen p-10 bg-black text-purple-200 '>
       <h1 className='text-2xl lg:text-5xl font-bold text-center my-12 mt-0 md:mb-20' >There's something for everyone</h1>
       <div className='flex flex-col md:flex-row justify-evenly'>
         <div id='container' className="flex-col md:flex-row md:mx-[50px] lg:w-1/2">

@@ -27,7 +27,7 @@ const features = [
 
 export default function Feature() {
   return (
-    <div aria-label="Features" className="overflow-hidden bg-black text-purple-100 px-10 py-24 sm:py-32">
+    <div id="features" aria-label="Features" className="overflow-hidden bg-black text-purple-100 px-10 py-24 sm:py-32">
       <p className="ml-5 text-3xl font-bold tracking-tight sm:text-4xl">
         Coding Elevated
       </p>
