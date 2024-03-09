@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const Hero = () => {
-  const route = useRouter();
+  const router = useRouter();
 
   const handleLogin = () => {
-    router.push("/auth/login");
+    router.push("/auth/signup");
   };
   return (
-    <section className="relative w-full pb-12 bg-[#09090B]">
+    <section className="relative w-full h-screen pb-12 bg-[#09090B]">
       <div className="max-w-screen px-8 md:px-16 py-auto">
         <div className="absolute left-1/2 top-1/2 -z-10  w-[300px] h-[400px] md:w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-purple-700 "></div>
 
@@ -28,7 +28,7 @@ const Hero = () => {
               up your skills with Doogle
             </h2>
             <button
-              href={`/auth/login`}
+              onClick={handleLogin}
               className=" cursor-pointer w-40 h-10 rounded-[25px] bg-purple-800"
             >
               Get Started

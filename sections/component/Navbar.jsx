@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Doogle', href: '#', current: false },
-  { name: 'Features', href: '#', current: false },
-  { name: 'FAQs', href: '#', current: false },
+  { name: 'Home', href: '#', current: false },
+  { name: 'Doogle', href: '#doogle', current: false },
+  { name: 'Features', href: '#features', current: false },
+  { name: 'FAQs', href: '#faqs', current: false },
 ]
 
 
@@ -25,7 +25,7 @@ export default function Navbar() {
    route.push('/auth/login')
   }
   return (
-    <Disclosure as="nav" className="bg-black">
+    <Disclosure as="nav" className="bg-black w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ export default function Navbar() {
                   <img
                     className="h-8 w-auto"
                     src="/Doogle.svg"
-                    alt="Your Company"
+                    alt="Doogle logo"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -70,7 +70,7 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 " role='button' tabIndex='0'>
                 <button
-                  onClick={()=>handleLogin}
+                  onClick={handleLogin}
                   type="button"
                   className="relative rounded p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >

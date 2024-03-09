@@ -17,7 +17,7 @@ import CTA from '@/sections/cta'
 const landingpage = () => {
   return (
     <>
-       <Navbar />
+      <Navbar />
       <Hero />
       <Beginner />
       <Intermediate />
