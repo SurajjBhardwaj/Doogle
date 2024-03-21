@@ -20,8 +20,10 @@ export default async function handleSignup(req, res) {
    if(req.method === "POST") {
         
         try {
-          const { name, email, password } = req.body;
-          console.log(name, email, password);
+          const { username, email, password } = req.body;
+          console.log(username, email, password);
+
+          console.log("new");
           // const user = await userModel.create({ email, password });
           const existingUser = await userModel.findOne({ email });
           if (existingUser) {
@@ -30,11 +32,13 @@ export default async function handleSignup(req, res) {
               .json({ success: false, message: "User already exists" });
           }
 
+          console.log("new2");
+
           // create an otp
           const otp = Math.floor(100000 + Math.random() * 900000);
             const otpExpiry = new Date().getTime() + 10 * 60 * 1000; // 10 minutes in milliseconds
             const otpCreationTime = new Date();
-            const newuser = new userModel({ name, email, password, otp, otpExpiry, otpCreationTime});
+            const newuser = new userModel({ name:username, email, password, otp, otpExpiry, otpCreationTime});
             const user = await newuser.save();
 
             const mailOptions = {
@@ -44,8 +48,11 @@ export default async function handleSignup(req, res) {
                 text: `Your OTP is ${otp}`,
             };
 
+          console.log("new4");
             const info = await transporter.sendMail(mailOptions);
-            console.log(info);
+          console.log(info);
+          
+          console.log("hey");
 
           res.status(201).json({ success: true, data: user });
         } catch (error) {
