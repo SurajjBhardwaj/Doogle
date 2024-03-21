@@ -22,7 +22,7 @@ const SignUp = () => {
         }
 
         console.log(value);
-      const response = await fetch('YOUR_API_ENDPOINT', {
+      const response = await fetch('api/handleSignup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
