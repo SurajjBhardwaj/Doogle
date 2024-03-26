@@ -1,10 +1,12 @@
 import { Link } from 'lucide-react';
+import { set } from 'mongoose';
 import React, { useState } from 'react';
 
 const OTPVerification = () => {
   // State variables to store input field values
   const [otp, setOTP] = useState('');
   const [loading, setLoading] = useState(false);
+  let [message, setMessage] = useState(''); // [
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -15,11 +17,27 @@ const OTPVerification = () => {
     setLoading(true);
     try {
       // Your API call code here
-      console.log('API call to verify OTP');
-      // Simulating API call delay for 2 seconds
-      console.log(otp);
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('API call completed');
+      const res = await fetch("api/auth/verifyOtp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ otp }),
+      });
+
+      if (res.ok) {
+        // Redirect to dashboard page
+        setMessage("thank you, redirecting to main page...");
+      } else {
+
+        
+        // Handle error
+        const { message } = await res.json();
+        setMessage(message);
+       
+      }
+
+
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -41,8 +59,10 @@ const OTPVerification = () => {
           <button type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             {loading ? 'Verifying...' : 'Verify OTP'}
+            {message && <p>{message}</p>}
           </button>
           <p className="text-center text-gray-500 mt-4">Didn&apos;t receive OTP? <Link href="#" className="text-blue-500 hover:text-blue-600">Resend OTP</Link></p>
+          
         </form>
       </div>
     </div>
