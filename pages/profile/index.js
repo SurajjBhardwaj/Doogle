@@ -32,8 +32,8 @@ const index = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-lg">Jyoti Kumari</h4>
-                <p className="font-medium text-sm">Doer</p>
+                <h4 className="font-semibold text-lg">Rajveer Kumar</h4>
+                <p className="font-medium text-sm">rajveer135</p>
 
                 <p className="mt-4">Level 8</p>
               </div>
@@ -49,7 +49,7 @@ const index = () => {
               </div>
               <div className="flex gap-3 justify-start items-center">
                 <Mail />
-                <p>jyotikumari@gmail.com</p>
+                <p>rajhad98@gmail.com</p>
               </div>
 
               <div className="flex gap-3 justify-start items-center">

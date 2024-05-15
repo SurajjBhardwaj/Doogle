@@ -58,7 +58,7 @@ const Home = () => {
             </HoverCardTrigger>
             <HoverCardContent className="w-60 bg-purple-50 border-purple-100">
               <div className="flex flex-col justify-between gap-2 text-black ">
-                <h4>Jyoti KM</h4>
+                <h4>Rajveer Singh </h4>
 
                 <Button variant="outline" className="rounded-xl ">
                   <Link href="/profile">View Profile</Link>
