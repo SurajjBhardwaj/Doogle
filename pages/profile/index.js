@@ -9,7 +9,7 @@ import { BugPlay } from "lucide-react";
 import { Cable } from "lucide-react";
 import MonthGrid from "@/sections/component/MonthGrid";
 
-const index = () => {
+const NewProfile = () => {
 
   const [user,setUser] = useState(null);
 
@@ -146,4 +146,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default NewProfile;
