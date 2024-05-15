@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
@@ -10,6 +10,24 @@ import { Cable } from "lucide-react";
 import MonthGrid from "@/sections/component/MonthGrid";
 
 const index = () => {
+
+  const [user,setUser] = useState(null);
+
+  useEffect(() => {
+
+    const userData = localStorage.getItem("user");
+    setUser(JSON.parse(userData));
+    console.log(userData);
+  }
+
+  , []);
+
+
+
+
+
+
+
   return (
     <section className="relative w-screen h-screen bg-purple-50 ">
       <div className="absolute  w-[90%] h-[95%]  opacity-30 blur-[100px] bg-purple-500 "></div>
@@ -32,10 +50,10 @@ const index = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-lg">Rajveer Kumar</h4>
-                <p className="font-medium text-sm">rajveer135</p>
+                <h4 className="font-semibold text-lg">{ user?.name}</h4>
+                <p className="font-medium text-sm">{user?.role}</p>
 
-                <p className="mt-4">Level 8</p>
+                <p className="mt-4">Level 0</p>
               </div>
             </div>
             <Button className="bg-purple-400 cursor-pointer  w-full">
@@ -49,7 +67,7 @@ const index = () => {
               </div>
               <div className="flex gap-3 justify-start items-center">
                 <Mail />
-                <p>rajhad98@gmail.com</p>
+                <p>{ user?.email}</p>
               </div>
 
               <div className="flex gap-3 justify-start items-center">

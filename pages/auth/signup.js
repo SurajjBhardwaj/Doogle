@@ -46,7 +46,7 @@ const SignUp = () => {
           "thank you for signing up, please check your email for verification"
         );
 
-        router.push("/auth/login");
+        router.push("/otp");
       } else {
         // Handle error response
 

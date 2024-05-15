@@ -8,6 +8,7 @@ export default async function handleSignup(req, res) {
         try {
             const { otp } = req.body;
             const user = await userModel.findOne({ otp });
+            console.log(otp, user);
             if (!user) {
                 return res
                     .status(400)

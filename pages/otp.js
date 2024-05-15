@@ -1,5 +1,6 @@
 import { Link } from 'lucide-react';
 import { set } from 'mongoose';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 const OTPVerification = () => {
@@ -7,6 +8,7 @@ const OTPVerification = () => {
   const [otp, setOTP] = useState('');
   const [loading, setLoading] = useState(false);
   let [message, setMessage] = useState(''); // [
+   const router = useRouter();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -17,7 +19,7 @@ const OTPVerification = () => {
     setLoading(true);
     try {
       // Your API call code here
-      const res = await fetch("api/auth/verifyOtp", {
+      const res = await fetch("api/verifyOtp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,6 +30,7 @@ const OTPVerification = () => {
       if (res.ok) {
         // Redirect to dashboard page
         setMessage("thank you, redirecting to main page...");
+        router.push("/auth/login");
       } else {
 
         

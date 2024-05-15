@@ -1,7 +1,7 @@
 "use State";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowUpRight, CircleUserRound, Code } from "lucide-react";
 import {
@@ -27,6 +27,7 @@ const Home = () => {
   const linkId = "i7y24hf" || Math.random().toString(36).slice(2);
   const router = useRouter();
   const [isloading, setIsLoading] = useState();
+  const [user, setUser] = useState(null);
 
   async function handleConnect() {
     setIsLoading(true);
@@ -35,6 +36,18 @@ const Home = () => {
       router.push(`/newRoom/${linkId}`);
     }, 7700);
   }
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+
+
+
+
 
   return (
     <section className="w-screen h-screen bg-purple-100 ">
@@ -58,7 +71,7 @@ const Home = () => {
             </HoverCardTrigger>
             <HoverCardContent className="w-60 bg-purple-50 border-purple-100">
               <div className="flex flex-col justify-between gap-2 text-black ">
-                <h4>Rajveer Singh </h4>
+                <h4>{user?.name}</h4>
 
                 <Button variant="outline" className="rounded-xl ">
                   <Link href="/profile">View Profile</Link>
