@@ -9,9 +9,9 @@ export default function FAQ() {
   return (
     <section id="faqs" className="pt-12 mx-auto text-4xl max-w-full bg-black text-purple-100">
       <h1 className="text-center">FAQ's</h1>
-      <Accordion type="single" collapsible className="lg:w-[900px] mt-12 mx-auto px-5 pb-20">
+      <Accordion type="single" collapsible className="lg:w-[1200px] mt-12 mx-auto px-5 pb-20">
         <AccordionItem value="item-1">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             What is the purpose of this platform?
           </AccordionTrigger>
           <AccordionContent>
@@ -21,7 +21,7 @@ export default function FAQ() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             {" "}
             Is the platform only for experienced developers?
           </AccordionTrigger>
@@ -32,7 +32,7 @@ export default function FAQ() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             {" "}
             What kind of assistance can I seek or offer?
           </AccordionTrigger>
@@ -43,7 +43,7 @@ export default function FAQ() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             {" "}
             How are credits or experience points earned?
           </AccordionTrigger>
@@ -54,7 +54,7 @@ export default function FAQ() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             {" "}
             How can I join and start using the platform?
           </AccordionTrigger>
@@ -65,7 +65,7 @@ export default function FAQ() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-6">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-lg">
             {" "}
             Is my information and data secure on the platform?
           </AccordionTrigger>
