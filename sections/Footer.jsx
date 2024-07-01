@@ -9,7 +9,7 @@ export default function footer() {
         >
           <div className="container mx-auto px-4 py-16 lg:px-8 lg:py-32 xl:max-w-7xl">
             <div className="grid grid-cols-1 gap-12 sm:grid-cols-6 md:gap-6 lg:gap-10">
-              <div className="space-y-6 sm:col-span-3 md:col-span-2">
+              {/* <div className="space-y-6 sm:col-span-3 md:col-span-2">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-400/75">
                   Products
                 </h4>
@@ -51,7 +51,7 @@ export default function footer() {
                     Support Center
                   </a>
                 </nav>
-              </div>
+              </div> */}
               <div className="space-y-6 sm:col-span-3 md:col-span-2">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-400/75">
                   Legal
@@ -100,7 +100,7 @@ export default function footer() {
                   About us
                 </h4>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2">
+                  {/* <div className="flex items-center gap-2">
                     <a
                       href="#"
                       className="block size-14 flex-none overflow-hidden rounded-full border-2 border-gray-50 transition duration-150 ease-out hover:scale-110 hover:border-white hover:shadow-md active:scale-100 active:border-gray-50 active:shadow-sm dark:border-gray-900 dark:shadow-gray-950"
@@ -128,7 +128,7 @@ export default function footer() {
                         alt="Avatar Photo"
                       />
                     </a>
-                  </div>
+                  </div> */}
                   <p className="text-sm/relaxed text-gray-600 dark:text-gray-400">
                   Founded by a team of dedicated developers, Doogle emerged
               from the simple idea that connecting with fellow developers can
