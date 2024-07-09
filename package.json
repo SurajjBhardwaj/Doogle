@@ -45,5 +45,12 @@
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
-  }
+  },
+  "description": "Welcome to Doogle, the ultimate platform for collaborative coding and knowledge exchange. Connect with fellow developers, solve coding challenges, and elevate your coding experience with Doogle's innovative features.",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "",
+  "license": "ISC"
 }
